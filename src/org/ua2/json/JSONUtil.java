@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 
 public class JSONUtil {
 	public static Map<Thread, IClient> clients = new HashMap<Thread, IClient>();
@@ -23,7 +24,7 @@ public class JSONUtil {
 		if(!response.ok) {
 			JSONException exception = new JSONException("Could not get JSON");
 			if(response.exception != null) {
-				exception.initCause(exception);
+				exception.initCause(response.exception);
 			}
 			throw exception;
 		}
@@ -42,7 +43,11 @@ public class JSONUtil {
 		return get("/folders").getArray();
 	}
 	
-	public static JSONArray getFolder(String folder) throws JSONException {
+	public static JSONArray getMessages(String folder) throws JSONException {
 		return get("/folder/" + folder).getArray();
+	}
+	
+	public static JSONObject getMessage(int id) throws JSONException {
+		return get("/message/" + id).getObject();
 	}
 }
