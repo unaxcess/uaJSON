@@ -47,7 +47,18 @@ public abstract class JSONClient {
 	}
 	
 	public JSONArray getMessages(String folder) throws JSONException {
-		return get("/folder/" + folder).getArray();
+		return getMessages(folder, false, false);
+	}
+	
+	public JSONArray getMessages(String folder, boolean unreadOnly, boolean full) throws JSONException {
+		String path = "/folder/" + folder;
+		if(unreadOnly) {
+			path += "/unread";
+		}
+		if(full) {
+			path += "/full";
+		}
+		return get(path).getArray();
 	}
 	
 	public JSONObject getMessage(int id) throws JSONException {
@@ -76,7 +87,7 @@ public abstract class JSONClient {
 			message.put("body", body);
 		}
 		
-		if(replyId != 0) {
+		if(replyId > 0) {
 			post("/message/" + replyId, message);
 		} else {
 			post("/folder/" + folder, message);
