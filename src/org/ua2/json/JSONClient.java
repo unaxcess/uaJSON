@@ -93,4 +93,10 @@ public abstract class JSONClient {
 			post("/folder/" + folder, message);
 		}
 	}
+
+	public void saveMessage(int id) throws JSONException {
+		JSONArray array = new JSONArray();
+		array.put(id);
+		post("/message/save", array);
+	}
 }
