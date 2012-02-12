@@ -99,4 +99,10 @@ public abstract class JSONClient {
 		array.put(id);
 		post("/message/save", array);
 	}
+
+	public void markThread(int id, boolean read) throws JSONException {
+		JSONArray array = new JSONArray();
+		array.put(id);
+		post("/message/read/sticky", array);
+	}
 }
