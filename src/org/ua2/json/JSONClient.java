@@ -72,7 +72,7 @@ public abstract class JSONClient {
 	}
 
 
-	public void postMessage(int replyId, String folder, String to, String subject, String body) throws JSONException {
+	public JSONMessage postMessage(int replyId, String folder, String to, String subject, String body) throws JSONException {
 		JSONObject message = new JSONObject();
 		
 		if(to != null) {
@@ -87,11 +87,15 @@ public abstract class JSONClient {
 			message.put("body", body);
 		}
 		
+		JSONWrapper wrapper = null;
+		
 		if(replyId > 0) {
-			post("/message/" + replyId, message);
+			wrapper = post("/message/" + replyId, message);
 		} else {
-			post("/folder/" + folder, message);
+			wrapper = post("/folder/" + folder, message);
 		}
+		
+		return new JSONMessage(wrapper);
 	}
 
 	public void saveMessage(int id) throws JSONException {
