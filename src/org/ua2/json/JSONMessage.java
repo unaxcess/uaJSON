@@ -86,4 +86,8 @@ public class JSONMessage extends JSONItem {
 	public List<Integer> getReplyToBy() {
 		return getList("replyToBy");
 	}
+
+	public int getCount() {
+		return data.optInt("count");
+	}
 }

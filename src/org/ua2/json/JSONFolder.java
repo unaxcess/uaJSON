@@ -11,6 +11,12 @@ public class JSONFolder extends JSONItem {
 		super(data);
 	}
 
+	public JSONFolder(String name) {
+		super();
+		
+		setField("name", name);
+	}
+
 	public String getName() {
 		return data.optString("folder");
 	}

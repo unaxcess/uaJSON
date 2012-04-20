@@ -17,6 +17,18 @@ public abstract class JSONItem {
 		this.data = data;
 	}
 	
+	protected JSONItem() {
+		this(new JSONObject());
+	}
+
+	protected void setField(String name, String value) {
+		try {
+			data.put(name, value);
+		} catch(JSONException e) {
+			throw new RuntimeException("Cannot set " + name + " field", e);
+		}
+	}
+
 	protected void setField(String name, int value) {
 		try {
 			data.put(name, value);
