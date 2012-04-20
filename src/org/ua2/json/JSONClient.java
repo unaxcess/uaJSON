@@ -98,15 +98,15 @@ public abstract class JSONClient {
 		return new JSONMessage(wrapper);
 	}
 
-	public void saveMessage(int id) throws JSONException {
+	public JSONObject saveMessage(int id) throws JSONException {
 		JSONArray array = new JSONArray();
 		array.put(id);
-		post("/message/save", array);
+		return post("/message/save", array).getObject();
 	}
 
-	public void markThread(int id, boolean read) throws JSONException {
+	public JSONObject markThread(int id, boolean read) throws JSONException {
 		JSONArray array = new JSONArray();
 		array.put(id);
-		post("/message/read/sticky", array);
+		return post("/catchup/message/sticky", array).getObject();
 	}
 }
