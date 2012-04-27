@@ -61,6 +61,14 @@ public abstract class JSONClient {
 		return get(path).getArray();
 	}
 	
+	public JSONArray getSavedMessages(boolean full) throws JSONException {
+		String path = "/messages/saved";
+		if(full) {
+			path += "/full";
+		}
+		return get(path).getArray();
+	}
+	
 	public JSONObject getMessage(int id) throws JSONException {
 		return get("/message/" + id).getObject();
 	}
